@@ -1,7 +1,7 @@
 <?php
 include './components/header.php';
 include './db/db_connect.php';
-
+include './controllers/movies.php'
 ?>
 <main>
     <section class="welcome">
@@ -16,6 +16,14 @@ include './db/db_connect.php';
   
     <section class="latest-movies">
       <h2>Latest Movies</h2>
+      <ul>
+
+        <?php 
+      $movies = getMovies($db, 10);
+      foreach ($movies as $movie) {
+        include './components/movie_card.php';
+      } ?>
+      </ul>
     </section>
 </main>
 
