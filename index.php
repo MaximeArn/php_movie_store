@@ -11,7 +11,7 @@ include './controllers/movies.php'
      <section class="cta">
       <h2>Discover Your Next Favorite Movie</h2>
       <p>Explore our extensive library and uncover hidden gems or revisit timeless classics. With just a few clicks, you can start building your collection today!</p>
-      <a href="search.php" class="btn">Search Movies</a>
+      <a href="pages/search.php" class="btn">Search Movies</a>
     </section>
   
     <section class="latest-movies">

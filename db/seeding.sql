@@ -97,7 +97,7 @@ INSERT INTO movies (title, description, price, image_url, director, category_id)
 ('Jurassic Park', 'Dinosaurs brought back to life.', 14.99, 'https://placehold.co/600x400', 'Steven Spielberg', 1),
 ('Pulp Fiction', 'An intertwining tale of crime and redemption.', 10.99, 'https://placehold.co/600x400', 'Quentin Tarantino', 2),
 ('The Dark Knight', 'Batman faces the Joker in Gotham City.', 11.99, 'https://placehold.co/600x400', 'Christopher Nolan', 1),
-('Interstellar', 'A team of explorers travel through a wormhole in space.', 13.99, 'interstellar.jpg', 'Christopher Nolan', 2),
+('Interstellar', 'A team of explorers travel through a wormhole in space.', 13.99, 'https://placehold.co/600x400', 'Christopher Nolan', 2),
 ('Avengers: Endgame', 'The Avengers assemble to defeat Thanos.', 15.99, 'https://placehold.co/600x400', 'Anthony and Joe Russo', 1),
 ('Black Widow', 'Natasha Romanoff confronts her past.', 8.99, 'https://placehold.co/600x400', 'Cate Shortland', 1),
 ('Iron Man', 'The story of Tony Stark and his suit of armor.', 9.49, 'https://placehold.co/600x400', 'Jon Favreau', 1),

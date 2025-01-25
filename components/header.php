@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../assets/styles/home_page.css">
     <link rel="stylesheet" href="../assets/styles/movie_details.css">
     <link rel="stylesheet" href="../assets/styles/categories.css">
+    <link rel="stylesheet" href="../assets/styles/movies.css">
 </head>
 <body>
     <header>
@@ -18,6 +19,7 @@
             <ul>
                 <li><a href="/index.php">Home</a></li>
                 <div class="navLinks">
+                    <li><a href="../pages/movies.php">Movies</a></li>
                     <li><a href="../pages/search.php">Search</a></li>
                     <li><a href="../pages/categories.php">Categories</a></li>
                 </div>
