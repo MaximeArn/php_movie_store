@@ -12,4 +12,16 @@ function getMovies($db, $nbrOfMovies = NULL) {
     echo "Error : ", $e->getMessage();
   }
 }
+
+function getMovieById($db, $id){
+  try {
+    $query = "SELECT * FROM movies WHERE id = :id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam('id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  } catch (PDOException $e) {
+    echo "Error : ", $e->getMessage();
+  }
+}
 ?>
