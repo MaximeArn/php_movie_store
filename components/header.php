@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../assets/styles/movie_details.css">
     <link rel="stylesheet" href="../assets/styles/categories.css">
     <link rel="stylesheet" href="../assets/styles/movies.css">
+    <link rel="stylesheet" href="../assets/styles/search.css">
 </head>
 <body>
     <header>

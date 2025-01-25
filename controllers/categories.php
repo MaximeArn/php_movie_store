@@ -12,7 +12,6 @@ function getCategories($db){
 
 function getCategoryById($db, $categoryId){
   try {
-    $categoryId = htmlspecialchars($categoryId);
     $query = "SELECT * FROM categories WHERE id = :categoryId";
     $stmt = $db->prepare($query);
     $stmt->bindParam('categoryId', $categoryId, PDO::PARAM_INT);

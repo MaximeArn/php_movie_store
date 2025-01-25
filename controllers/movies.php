@@ -15,7 +15,6 @@ function getMovies($db, $nbrOfMovies = NULL) {
 
 function getMovieById($db, $id){
   try {
-    $id = htmlspecialchars($id);
     $query = "SELECT * FROM movies WHERE id = :id";
     $stmt = $db->prepare($query);
     $stmt->bindParam('id', $id, PDO::PARAM_INT);
@@ -28,10 +27,22 @@ function getMovieById($db, $id){
 
 function getMoviesByCategory($db, $categoryId){
   try {
-    $categoryId = htmlspecialchars($categoryId);
     $query = "SELECT * FROM movies WHERE category_id = :categoryId";
     $stmt = $db->prepare($query);
     $stmt->bindParam('categoryId', $categoryId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $e) {
+    echo "Error : ", $e->getMessage();
+  }
+}
+
+function searchMovies($db, $searchQuery){
+  try {
+    $query = "SELECT * FROM movies WHERE title LIKE :searchQuery OR director LIKE :searchQuery";
+    $stmt = $db->prepare($query);
+    $searchQuery = '%' . $searchQuery . '%';
+    $stmt->bindParam('searchQuery', $searchQuery, PDO::PARAM_STR);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   } catch (PDOException $e) {
