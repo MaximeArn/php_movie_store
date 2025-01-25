@@ -1,7 +1,8 @@
-<?php include '../components/header.php' ?>
-<?php include '../db/db_connect.php' ?>
-<?php include '../controllers/movies.php' ?>
 <?php 
+  include '../components/header.php' ;
+  include '../db/db_connect.php' ;
+  include '../controllers/movies.php' ;
+
   $id = $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
   $movie = getMovieById($db, $id)
 ?>

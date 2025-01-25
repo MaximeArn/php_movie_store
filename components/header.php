@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../assets/styles/movie_cards.css">
     <link rel="stylesheet" href="../assets/styles/home_page.css">
     <link rel="stylesheet" href="../assets/styles/movie_details.css">
+    <link rel="stylesheet" href="../assets/styles/categories.css">
 </head>
 <body>
     <header>

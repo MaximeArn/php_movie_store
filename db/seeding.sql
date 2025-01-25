@@ -1,6 +1,15 @@
 CREATE DATABASE IF NOT EXISTS movie_store;
 USE movie_store;
 
+DROP TABLE IF EXISTS movie_actors;
+DROP TABLE IF EXISTS cart_items;
+DROP TABLE IF EXISTS carts;
+DROP TABLE IF EXISTS purchase_history;
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS actors;
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -14,6 +23,11 @@ CREATE TABLE actors (
     name VARCHAR(100) NOT NULL UNIQUE
 );
 
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
 CREATE TABLE movies (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -21,8 +35,9 @@ CREATE TABLE movies (
     price DECIMAL(10, 2) NOT NULL,
     image_url VARCHAR(255),
     director VARCHAR(100) NOT NULL,
-    category ENUM('Action', 'Drama', 'Comedy', 'Horror') NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    category_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 
 CREATE TABLE movie_actors (
@@ -32,7 +47,6 @@ CREATE TABLE movie_actors (
     FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE,
     FOREIGN KEY (actor_id) REFERENCES actors(id) ON DELETE CASCADE
 );
-
 
 CREATE TABLE carts (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,6 +73,12 @@ CREATE TABLE purchase_history (
     FOREIGN KEY (movie_id) REFERENCES movies(id)
 );
 
+INSERT INTO categories (name) VALUES
+('Action'),
+('Drama'),
+('Comedy'),
+('Horror');
+
 INSERT INTO actors (name) VALUES
 ('Leonardo DiCaprio'),
 ('Brad Pitt'),
@@ -71,27 +91,38 @@ INSERT INTO actors (name) VALUES
 ('Morgan Freeman'),
 ('Anne Hathaway');
 
-INSERT INTO movies (title, description, price, image_url, director, category) VALUES
-('Inception', 'A mind-bending thriller about dream manipulation.', 9.99, 'inception.jpg', 'Christopher Nolan', 'Action'),
-('The Wolf of Wall Street', 'The story of a Wall Street tycoon.', 12.99, 'wolf_of_wall_street.jpg', 'Martin Scorsese', 'Drama'),
-('Jurassic Park', 'Dinosaurs brought back to life.', 14.99, 'jurassic_park.jpg', 'Steven Spielberg', 'Action'),
-('Pulp Fiction', 'An intertwining tale of crime and redemption.', 10.99, 'pulp_fiction.jpg', 'Quentin Tarantino', 'Drama'),
-('The Dark Knight', 'Batman faces the Joker in Gotham City.', 11.99, 'dark_knight.jpg', 'Christopher Nolan', 'Action'),
-('Interstellar', 'A team of explorers travel through a wormhole in space.', 13.99, 'interstellar.jpg', 'Christopher Nolan', 'Drama'),
-('Avengers: Endgame', 'The Avengers assemble to defeat Thanos.', 15.99, 'endgame.jpg', 'Anthony and Joe Russo', 'Action'),
-('Black Widow', 'Natasha Romanoff confronts her past.', 8.99, 'black_widow.jpg', 'Cate Shortland', 'Action'),
-('Iron Man', 'The story of Tony Stark and his suit of armor.', 9.49, 'iron_man.jpg', 'Jon Favreau', 'Action'),
-('Thor: Ragnarok', 'Thor must escape the planet Sakaar.', 10.49, 'thor_ragnarok.jpg', 'Taika Waititi', 'Comedy'),
-('Forrest Gump', 'A man with a low IQ achieves great things in life.', 7.99, 'forrest_gump.jpg', 'Robert Zemeckis', 'Drama'),
-('The Matrix', 'A hacker discovers the truth about his reality.', 12.49, 'matrix.jpg', 'The Wachowskis', 'Action'),
-('The Godfather', 'The story of the powerful Corleone family.', 14.49, 'godfather.jpg', 'Francis Ford Coppola', 'Drama'),
-('The Shawshank Redemption', 'Two imprisoned men bond over years.', 10.99, 'shawshank.jpg', 'Frank Darabont', 'Drama'),
-('Gladiator', 'A betrayed Roman general seeks vengeance.', 12.99, 'gladiator.jpg', 'Ridley Scott', 'Action'),
-('Titanic', 'A love story aboard the ill-fated Titanic.', 11.49, 'titanic.jpg', 'James Cameron', 'Drama'),
-('The Avengers', 'Earth\'s mightiest heroes team up.', 13.49, 'avengers.jpg', 'Joss Whedon', 'Action'),
-('Doctor Strange', 'A surgeon becomes the Sorcerer Supreme.', 9.99, 'doctor_strange.jpg', 'Scott Derrickson', 'Action'),
-('The Lion King', 'A young lion prince flees his kingdom.', 8.99, 'lion_king.jpg', 'Jon Favreau', 'Drama');
-
+INSERT INTO movies (title, description, price, image_url, director, category_id) VALUES
+('Inception', 'A mind-bending thriller about dream manipulation.', 9.99, 'https://placehold.co/600x400', 'Christopher Nolan', 1),
+('The Wolf of Wall Street', 'The story of a Wall Street tycoon.', 12.99, 'https://placehold.co/600x400', 'Martin Scorsese', 2),
+('Jurassic Park', 'Dinosaurs brought back to life.', 14.99, 'https://placehold.co/600x400', 'Steven Spielberg', 1),
+('Pulp Fiction', 'An intertwining tale of crime and redemption.', 10.99, 'https://placehold.co/600x400', 'Quentin Tarantino', 2),
+('The Dark Knight', 'Batman faces the Joker in Gotham City.', 11.99, 'https://placehold.co/600x400', 'Christopher Nolan', 1),
+('Interstellar', 'A team of explorers travel through a wormhole in space.', 13.99, 'interstellar.jpg', 'Christopher Nolan', 2),
+('Avengers: Endgame', 'The Avengers assemble to defeat Thanos.', 15.99, 'https://placehold.co/600x400', 'Anthony and Joe Russo', 1),
+('Black Widow', 'Natasha Romanoff confronts her past.', 8.99, 'https://placehold.co/600x400', 'Cate Shortland', 1),
+('Iron Man', 'The story of Tony Stark and his suit of armor.', 9.49, 'https://placehold.co/600x400', 'Jon Favreau', 1),
+('Thor: Ragnarok', 'Thor must escape the planet Sakaar.', 10.49, 'https://placehold.co/600x400', 'Taika Waititi', 3),
+('Forrest Gump', 'A man with a low IQ achieves great things in life.', 7.99, 'https://placehold.co/600x400', 'Robert Zemeckis', 2),
+('The Matrix', 'A hacker discovers the truth about his reality.', 12.49, 'https://placehold.co/600x400', 'The Wachowskis', 1),
+('The Godfather', 'The story of the powerful Corleone family.', 14.49, 'https://placehold.co/600x400', 'Francis Ford Coppola', 2),
+('The Shawshank Redemption', 'Two imprisoned men bond over years.', 10.99, 'https://placehold.co/600x400', 'Frank Darabont', 2),
+('Gladiator', 'A betrayed Roman general seeks vengeance.', 12.99, 'https://placehold.co/600x400', 'Ridley Scott', 1),
+('Titanic', 'A love story aboard the ill-fated Titanic.', 11.49, 'https://placehold.co/600x400', 'James Cameron', 2),
+('The Avengers', 'Earth\'s mightiest heroes team up.', 13.49, 'https://placehold.co/600x400', 'Joss Whedon', 1),
+('Doctor Strange', 'A surgeon becomes the Sorcerer Supreme.', 9.99, 'https://placehold.co/600x400', 'Scott Derrickson', 1),
+('The Lion King', 'A young lion prince flees his kingdom.', 8.99, 'https://placehold.co/600x400', 'Jon Favreau', 2),
+('Frozen', 'An ice queen must learn to control her powers.', 8.49, 'https://placehold.co/600x400', 'Chris Buck & Jennifer Lee', 2),
+('Finding Nemo', 'A clownfish searches for his son.', 7.99, 'https://placehold.co/600x400', 'Andrew Stanton', 2),
+('Shrek', 'An ogre rescues a princess.', 9.99, 'https://placehold.co/600x400', 'Andrew Adamson', 3),
+('Toy Story', 'Toys come to life in this animated classic.', 8.49, 'https://placehold.co/600x400', 'John Lasseter', 3),
+('Mad Max: Fury Road', 'Post-apocalyptic action-packed adventure.', 10.99, 'https://placehold.co/600x400', 'George Miller', 1),
+('The Social Network', 'The story of Facebook\'s creation.', 9.99, 'https://placehold.co/600x400', 'David Fincher', 2),
+('The Big Short', 'A group of investors predict the financial crisis.', 8.99, 'https://placehold.co/600x400', 'Adam McKay', 2),
+('Get Out', 'A suspenseful thriller with social commentary.', 9.99, 'https://placehold.co/600x400', 'Jordan Peele', 4),
+('It', 'A group of kids faces a terrifying clown.', 10.49, 'https://placehold.co/600x400', 'Andy Muschietti', 4),
+('A Quiet Place', 'A family survives in silence to avoid creatures.', 9.49, 'https://placehold.co/600x400', 'John Krasinski', 4),
+('Parasite', 'A gripping tale of class divide and survival.', 10.99, 'https://placehold.co/600x400', 'Bong Joon-ho', 2),
+('Whiplash', 'A young drummer faces an intense music teacher.', 8.99, 'https://placehold.co/600x400', 'Damien Chazelle', 2);
 INSERT INTO movie_actors (movie_id, actor_id) VALUES
 (1, 1),
 (2, 1),
@@ -112,4 +143,15 @@ INSERT INTO movie_actors (movie_id, actor_id) VALUES
 (16, 2),
 (17, 1),
 (18, 6),
-(19, 8);
+(19, 8),
+(20, 9),
+(21, 10),
+(22, 3),
+(23, 6),
+(24, 7),
+(25, 8),
+(26, 9),
+(27, 4),
+(28, 2),
+(29, 1),
+(30, 5);
