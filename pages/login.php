@@ -3,11 +3,17 @@ include '../components/header.php'
 ?>
 <main>
     <section class="login-page-container">
+        <?php if (isset($_GET['error'])): ?>
+            <div class="error-message">
+                <?php echo htmlspecialchars(urldecode($_GET['error'])); ?>
+            </div>
+            <?php endif; ?>
+            
         <h1 class="login-page-title">Login</h1>
-        <form action="login_process.php" method="POST" class="login-page-form">
+        <form action="../includes/login_process.php" method="POST" class="login-page-form">
             <div class="login-form-group">
-                <label for="username" class="login-form-label">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" class="login-form-input" required>
+                <label for="email" class="login-form-label">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" class="login-form-input" required>
             </div>
             <div class="login-form-group">
                 <label for="password" class="login-form-label">Password</label>

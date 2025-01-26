@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../assets/styles/movies.css">
     <link rel="stylesheet" href="../assets/styles/search.css">
     <link rel="stylesheet" href="../assets/styles/auth.css">
+    <link rel="stylesheet" href="../assets/styles/profile.css">
 </head>
 <body>
     <header>
@@ -25,8 +26,18 @@
                     <li><a href="../pages/search.php">Search</a></li>
                     <li><a href="../pages/categories.php">Categories</a></li>
                 </div>
-                <!-- TODO: display only if user is connected -->
-                <li><a href="../pages/cart.php">Cart</a></li>
+                <?php 
+                echo "<div>";
+                session_start();
+                if (isset($_SESSION["user_id"])) {
+                    echo "<li><a href=\"../pages/cart.php\">Cart</a></li>";
+                    echo "<li><a href=\"../pages/profile.php\">Profile</a></li>";
+                }else{
+                    echo "<li><a href=\"../pages/login.php\">Login</a></li>";
+                    echo "<li><a href=\"../pages/register.php\">Register</a></li>";
+                }
+                echo "</div>";
+                ?>
             </ul>
         </nav>
     </header>

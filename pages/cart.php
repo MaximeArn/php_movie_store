@@ -1,7 +1,6 @@
 <?php 
 include '../components/header.php';
 include '../db/db_connect.php';
-
 ?>
 <main>
   <?php if (!isset($_SESSION["user_id"])) {

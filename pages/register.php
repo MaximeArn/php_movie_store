@@ -1,10 +1,18 @@
 <?php 
-include '../components/header.php'
+include '../components/header.php';
+$error = isset($_GET['error']) ? urldecode($_GET['error']) : NULL;
 ?>
 <main>
     <section class="login-page-container">
+        
+      <?php if ($error): ?>
+          <div class="error-message">
+              <?php echo htmlspecialchars($error); ?>
+          </div>
+      <?php endif; ?>
+
         <h1 class="login-page-title">Register</h1>
-        <form action="register_process.php" method="POST" class="login-page-form">
+        <form action="../includes/register_process.php" method="POST" class="login-page-form">
             <div class="login-form-group">
                 <label for="username" class="login-form-label">Username</label>
                 <input type="text" id="username" name="username" placeholder="Choose a username" class="login-form-input" required>
@@ -29,5 +37,5 @@ include '../components/header.php'
     </section>
 </main>
 <?php 
-include '../components/footer.php'
+include '../components/footer.php';
 ?>
