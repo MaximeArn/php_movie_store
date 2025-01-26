@@ -53,4 +53,28 @@ function addMovieToCart($db, $userId, $movieId){
         return false;
     }
 } 
+
+function removeMovieFromCart($db, $userId, $movieId) {
+    try {
+        $cartQuery = "SELECT id FROM carts WHERE user_id = :user_id";
+        $stmt = $db->prepare($cartQuery);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        $cart = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$cart) {
+            return false;
+        }
+
+        $cartItemQuery = "DELETE FROM cart_items WHERE cart_id = :cart_id AND movie_id = :movie_id";
+        $stmt = $db->prepare($cartItemQuery);
+        $stmt->bindParam(':cart_id', $cart['id'], PDO::PARAM_INT);
+        $stmt->bindParam(':movie_id', $movieId, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        error_log("Error removing movie from cart: " . $e->getMessage());
+        return false;
+    }
+}
 ?>
