@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../assets/styles/global.css">
     <link rel="stylesheet" href="../assets/styles/header.css">
     <link rel="stylesheet" href="../assets/styles/footer.css">
-    <link rel="stylesheet" href="../assets/styles/movie_cards.css">
+    <link rel="stylesheet" href="../assets/styles/movie_card.css">
     <link rel="stylesheet" href="../assets/styles/home_page.css">
     <link rel="stylesheet" href="../assets/styles/movie_details.css">
     <link rel="stylesheet" href="../assets/styles/categories.css">

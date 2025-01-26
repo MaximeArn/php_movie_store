@@ -37,6 +37,18 @@ function getMoviesByCategory($db, $categoryId){
   }
 }
 
+function getMoviesByDirector($db, $director){
+  try {
+    $query = "SELECT * FROM movies WHERE director = :director";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam('director', $director, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $e) {
+    echo "Error : ", $e->getMessage();
+  }
+}
+
 function searchMovies($db, $searchQuery){
   try {
     $query = "SELECT * FROM movies WHERE title LIKE :searchQuery OR director LIKE :searchQuery";
@@ -49,4 +61,5 @@ function searchMovies($db, $searchQuery){
     echo "Error : ", $e->getMessage();
   }
 }
+
 ?>

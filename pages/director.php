@@ -2,19 +2,19 @@
 include '../components/header.php';
 include '../db/db_connect.php';
 include '../controllers/movies.php';
+
+$director = isset($_GET['director']) ? $_GET['director'] : "";
+$movies = getMoviesByDirector($db, $director);
+
 ?>
 <main>
     <section class="movies-list">
-        <h1>Available movies</h1>
+        <h1>Movies for : <?php echo $director ?></h1>
         <ul>
         <?php 
-      $movies = getMovies($db);
       foreach ($movies as $movie) {
         include '../components/movie_card.php';
       } ?>
       </ul>
     </section>
 </main>
-<?php 
-include '../components/footer.php';
-?>

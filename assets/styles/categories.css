@@ -29,7 +29,7 @@
   transform: scale(105%);
 }
 
-.category-item a {
+.category-list a {
   text-decoration: none;
   color: inherit;
   font-size: 1.2rem;
@@ -37,6 +37,6 @@
   transition: color 0.3s ease;
 }
 
-.category-item a:hover {
+.category-list a:hover {
   color: inherit;
 }

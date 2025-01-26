@@ -10,11 +10,11 @@ $categories = getCategories($db);
         <h1>Categories</h1>
         <ul class="category-list">
             <?php foreach ($categories as $category): ?>
+                <a href="category.php?id=<?php echo htmlspecialchars($category['id']); ?>">
                 <li class="category-item">
-                    <a href="category.php?id=<?php echo htmlspecialchars($category['id']); ?>">
-                        <?php echo htmlspecialchars($category['name']); ?>
-                    </a>
-                </li>
+                    <?php echo htmlspecialchars($category['name']); ?>
+                    </li>
+                </a>
             <?php endforeach; ?>
         </ul>
     </section>
