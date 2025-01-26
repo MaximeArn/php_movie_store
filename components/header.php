@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../assets/styles/categories.css">
     <link rel="stylesheet" href="../assets/styles/movies.css">
     <link rel="stylesheet" href="../assets/styles/search.css">
+    <link rel="stylesheet" href="../assets/styles/auth.css">
 </head>
 <body>
     <header>
