@@ -1,10 +1,16 @@
 <?php 
-  include '../components/header.php' ;
-  include '../db/db_connect.php' ;
-  include '../controllers/movies.php' ;
+  include '../components/header.php';
+  include '../db/db_connect.php';
+  include '../controllers/movies.php';
 
-  $id = $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+  $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
   $movie = getMovieById($db, $id);
+
+  if (!$movie) {
+    echo "<main><p>Movie not found</p></main>";
+    include '../components/footer.php';
+    exit;
+  }
 
   $imageUrl = htmlspecialchars($movie["image_url"]);
   $title = htmlspecialchars($movie['title']);
@@ -15,12 +21,6 @@
   $actors = htmlspecialchars($movie['actors']);
 ?>
 <main>
-  <?php 
-  if(!$movie){
-    echo "<p>Movie not found</p>";
-    exit;
-  };
-  ?>
   <section class="movie-details">
         <div class="movie-poster">
             <img src="<?php echo $imageUrl ?>" alt="<?php echo $title ?>">
@@ -29,14 +29,19 @@
             <h1><?php echo $title ?></h1>
             <p class="director">
                 Directed by:
-                 <a href="../pages/director.php?director=<?php echo $director?>"> <?php echo $director ?> </a>
+                <a href="../pages/director.php?director=<?php echo urlencode($director); ?>"><?php echo $director; ?></a>
             </p>
-            <p>Actors : <?php echo $actors ?></p>
+            <p>Actors: <?php echo $actors; ?></p>
             <p class="description"><?php echo $description; ?></p>
-            <p class="price"><strong>Price:</strong> $<?php echo $price ?></p>
-            <a href="cart.php?action=add&id=<?php echo $id; ?>" class="btn">Add to Cart</a>
+            <p class="price"><strong>Price:</strong> $<?php echo $price; ?></p>
+            
+            <!-- Add to Cart Form -->
+            <form action="../includes/add_to_cart_process.php" method="POST">
+                <input type="hidden" name="movie_id" value="<?php echo $id; ?>">
+                <button type="submit" class="btn">Add to Cart</button>
+            </form>
         </div>
     </section>
 </main>
 
-<?php include '../components/footer.php' ?>
+<?php include '../components/footer.php'; ?>

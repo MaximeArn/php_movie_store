@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../assets/styles/search.css">
     <link rel="stylesheet" href="../assets/styles/auth.css">
     <link rel="stylesheet" href="../assets/styles/profile.css">
+    <link rel="stylesheet" href="../assets/styles/cart.css">
 </head>
 <body>
     <header>
