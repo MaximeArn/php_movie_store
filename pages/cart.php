@@ -28,8 +28,8 @@ $cart = getUserCart($db, $userId);
 
             <div class="cart-summary">
                 <p class="cart-total">Total: $<?php echo number_format(array_sum(array_column($cart, 'price')), 2); ?></p>
-                <form action="../includes/cart_process.php" method="POST">
-                    <button type="submit" name="action" value="checkout" class="checkout-btn">Checkout</button>
+                <form action="../includes/checkout_process.php" method="POST">
+                    <button type="submit" name="checkout" class="checkout-btn">Checkout</button>
                 </form>
             </div>
             

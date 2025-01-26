@@ -77,4 +77,20 @@ function removeMovieFromCart($db, $userId, $movieId) {
         return false;
     }
 }
+
+function emptyUserCart($db, $userId) {
+    try {
+        $query = "
+            DELETE ci FROM cart_items ci
+            JOIN carts c ON ci.cart_id = c.id
+            WHERE c.user_id = :user_id
+        ";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        error_log("Error emptying cart: " . $e->getMessage());
+        return false;
+    }
+}
 ?>
