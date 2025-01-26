@@ -15,7 +15,23 @@ function getMovies($db, $nbrOfMovies = NULL) {
 
 function getMovieById($db, $id){
   try {
-    $query = "SELECT * FROM movies WHERE id = :id";
+    $query = "
+            SELECT 
+                m.id, 
+                m.title, 
+                m.description, 
+                m.price, 
+                m.image_url, 
+                m.director, 
+                m.category_id, 
+                m.created_at,
+                GROUP_CONCAT(a.name SEPARATOR ', ') AS actors
+            FROM movies m
+            LEFT JOIN movie_actors ma ON m.id = ma.movie_id
+            LEFT JOIN actors a ON ma.actor_id = a.id
+            WHERE m.id = :id
+            GROUP BY m.id
+    ";
     $stmt = $db->prepare($query);
     $stmt->bindParam('id', $id, PDO::PARAM_INT);
     $stmt->execute();

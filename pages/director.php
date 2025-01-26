@@ -8,6 +8,13 @@ $movies = getMoviesByDirector($db, $director);
 
 ?>
 <main>
+  <?php 
+  if(count($movies) == 0){
+    echo "<p>No movies found !</p>";
+    exit;
+  }
+  
+  ?>
     <section class="movies-list">
         <h1>Movies for : <?php echo $director ?></h1>
         <ul>
